@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Page title -->
+    <title>TFG</title>
+
+    <!-- Bootstrap CSS and JS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/custom.js"></script>
+
+    <style>
+        .card-custom {
+            transition: box-shadow .3s;
+            position: relative;
+            max-width: 300px; /* Adjust this value as needed */
+            min-width: 300px; /* Minimum width to prevent cards from becoming too narrow */
+            height: 450px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+            font-family: Arial, sans-serif;
+            margin-bottom: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .card-custom.small {
+            transition: box-shadow .3s;
+            position: relative;
+            max-width: 250px; /* Adjust this value as needed */
+            min-width: 250px; /* Minimum width to prevent cards from becoming too narrow */
+            height: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+            font-family: Arial, sans-serif;
+            margin-bottom: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .card-custom.active {
+            border: 2px solid blue;
+        }
+
+        .card-custom:hover {
+            box-shadow: 0 0px 8px rgba(10, 139, 209, 0.964);
+        }
+
+        .card-custom-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-custom-caption {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-body {
+            display: flex;
+            justify-content: center;
+        }
+
+        .scrolling-wrapper {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scroll-behavior: smooth;
+            padding: 10px;
+            justify-content: flex-start;
+        }
+
+        .scrolling-wrapper::-webkit-scrollbar {
+            display: none; /* Hide scrollbar */
+        }
+
+        .arrow {
+            position: absolute;
+            top: 60%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .arrow-left {
+            left: 0;
+        }
+
+        .arrow-right {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">TFG</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Iniciar sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signup">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container position-relative">
+    <div class="row">
+        <div class="col-12 text-left">
+            <h1>Hola, {{ username }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="my-5">¿Quieres añadir alguna opción?</h2>
+        </div>
+    </div>
+
+    <button class="arrow arrow-left" onclick="scrollLeft()">&#10094;</button>
+    <button class="arrow arrow-right" onclick="scrollRight()">&#10095;</button>
+
+    <div class="scrolling-wrapper">
+        <a href="" data-bs-toggle="modal" data-bs-target="#colorModal">
+            <div class="card-custom">
+            
+                <img src="image/cards/image_options/color.png" alt="Imagen" class="card-custom-image">
+                <div class="card-custom-caption">Color</div>
+                
+            </div>
+        </a>
+
+        <a href="" data-bs-toggle="modal" data-bs-target="#emotionModal">
+            <div class="card-custom">
+                <img src="image/cards/image_options/emotion.png" alt="Audio" class="card-custom-image">
+                <div class="card-custom-caption">Emoción</div>
+            </div>
+        </a>
+
+        <a href="" data-bs-toggle="modal" data-bs-target="#placeModal">
+            <div class="card-custom">
+                <img src="image/cards/image_options/place.png" alt="Vídeo" class="card-custom-image">
+                <div class="card-custom-caption">Lugar</div>
+            </div>
+        </a>
+
+        <a href="" data-bs-toggle="modal" data-bs-target="#styleModal">
+            <div class="card-custom">
+                <img src="image/cards/image_options/style.png" alt="Documento" class="card-custom-image">
+                <div class="card-custom-caption">Estilo</div>
+            </div>
+        </a>
+
+        <a href="" data-bs-toggle="modal" data-bs-target="#phototypeModal">
+            <div class="card-custom">
+                <img src="image/cards/image_options/phototype.png" alt="Documento" class="card-custom-image">
+                <div class="card-custom-caption">Tipo de foto</div>
+            </div>
+        </a>
+
+        <a href="" data-bs-toggle="modal" data-bs-target="#lightingModal">
+            <div class="card-custom">
+                <img src="image/cards/image_options/lighting.png" alt="Presentación" class="card-custom-image">
+                <div class="card-custom-caption">Iluminación</div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+  
+  <!-- Modal Color -->
+  <div class="modal fade" id="colorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Color</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+           
+            <div class="scrolling-wrapper">
+                <div class="card-custom small">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <img src="image/imageColors/pastel.png" alt="Imagen" class="card-custom-image">
+                    <div class="card-custom-caption">Pastel</div>
+                    </a>
+                </div>
+                <div class="card-custom small">
+                    <img src="image/imageColors/dark.png" alt="Audio" class="card-custom-image">
+                    <div class="card-custom-caption">Oscuros</div>
+                </div>
+                <div class="card-custom small">
+                    <img src="image/imageColors/vibrant.png" alt="Vídeo" class="card-custom-image">
+                    <div class="card-custom-caption">Vibrantes</div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal Emocion -->
+    <div class="modal fade" id="emotionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Emoción</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               
+                <div class="scrolling-wrapper">
+                    <div class="card-custom small">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="image/imageEmotions/positive.png" alt="Imagen" class="card-custom-image">
+                        <div class="card-custom-caption">Positiva</div>
+                        </a>
+                    </div>
+                    <div class="card-custom small">
+                        <img src="image/imageEmotions/negative.png" alt="Audio" class="card-custom-image">
+                        <div class="card-custom-caption">Negativa</div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+              
+              <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- Modal Place -->
+  <div class="modal fade" id="placeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Lugar</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+           
+            <div class="scrolling-wrapper">
+                <div class="card-custom small">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <img src="image/imagePlaces/inside.png" alt="Imagen" class="card-custom-image">
+                    <div class="card-custom-caption">Interior</div>
+                    </a>
+                </div>
+                <div class="card-custom small">
+                    <img src="image/imagePlaces/outside.png" alt="Audio" class="card-custom-image">
+                    <div class="card-custom-caption">Exterior</div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Modal Style -->
+    <div class="modal fade" id="styleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Estilo</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               
+                <div class="scrolling-wrapper">
+                    <div class="card-custom small">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="image/imageStyles/anime.png" alt="Imagen" class="card-custom-image">
+                        <div class="card-custom-caption">Anime</div>
+                        </a>
+                    </div>
+                    <div class="card-custom small">
+                        <img src="image/imageStyles/pixar.png" alt="Audio" class="card-custom-image">
+                        <div class="card-custom-caption">Pixar</div>
+                    </div>
+                    <div class="card-custom small">
+                        <img src="image/imageStyles/cinematic.png" alt="Vídeo" class="card-custom-image">
+                        <div class="card-custom-caption">Cinemático</div>
+                    </div>
+
+                    <div class="card-custom small">
+                        <img src="image/imageStyles/render.png" alt="Vídeo" class="card-custom-image">
+                        <div class="card-custom-caption">3D Render</div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+              
+              <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- Modal phototype -->
+  <div class="modal fade" id="phototypeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Tipo de foto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+           
+            <div class="scrolling-wrapper">
+                <div class="card-custom small">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <img src="image/imagePhototypes/close.png" alt="Imagen" class="card-custom-image">
+                    <div class="card-custom-caption">Cercana</div>
+                    </a>
+                </div>
+                <div class="card-custom small">
+                    <img src="image/imagePhototypes/long.png" alt="Audio" class="card-custom-image">
+                    <div class="card-custom-caption">Lejana</div>
+                </div>
+             
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal lighting -->
+    <div class="modal fade" id="lightingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Iluminación</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               
+                <div class="scrolling-wrapper">
+                    <div class="card-custom small">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="image/imageLighting/day.png" alt="Imagen" class="card-custom-image">
+                        <div class="card-custom-caption">Día</div>
+                        </a>
+                    </div>
+                    <div class="card-custom small">
+                        <img src="image/imageLighting/dark.png" alt="Audio" class="card-custom-image">
+                        <div class="card-custom-caption">Noche</div>
+                    </div>
+                    <div class="card-custom small">
+                        <img src="image/imageLighting/afternoon.png" alt="Vídeo" class="card-custom-image">
+                        <div class="card-custom-caption">Atardecer</div>
+                    </div>
+                    <div class="card-custom small">
+                        <img src="image/imageLighting/neon.png" alt="Vídeo" class="card-custom-image">
+                        <div class="card-custom-caption">Neón</div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+              
+              <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<script>
+    function scrollLeft() {
+        const container = document.querySelector('.scrolling-wrapper');
+        container.scrollBy({
+            left: -300, // Adjust this value as needed
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollRight() {
+        const container = document.querySelector('.scrolling-wrapper');
+        container.scrollBy({
+            left: 300, // Adjust this value as needed
+            behavior: 'smooth'
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+ 
+    /* Seleccion estilo */
+  /*con jquery
+    $(document).ready(function(){
+        $(".style-image").click(function(){
+            // Remove active class from all images
+            $(".style-image").removeClass("active");
+            // Add active class to the clicked image
+            $(this).addClass("active");
+            // Get the selected estilo value
+            var selectedEstilo = $(this).data("estilo");
+            console.log("Selected estilo:", selectedEstilo);s
+        });
+         }); */
+
+        var styleImages = document.querySelectorAll('.small');
+
+    styleImages.forEach(function (image) {
+        image.addEventListener('click', function () {
+            // Remove active class from all images
+            styleImages.forEach(function (img) {
+                img.classList.remove('active');
+            });
+
+            // Add active class to the clicked image
+            this.classList.add('active');
+
+            // Get the selected estilo value
+            var selectedEstilo = this.getAttribute('data-estilo');
+            console.log("Selected estilo:", selectedEstilo);
+        });
+    });
+});
+
+</script>
+
+</body>
+</html>

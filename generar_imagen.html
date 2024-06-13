@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Page title -->
+    <title>TFG</title>
+
+    <!-- Bootstrap CSS and JS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/custom.css">
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/custom.js"></script>
+
+    <style>
+        .card-card {
+            transition: box-shadow .3s;
+            position: relative;
+            width: 300px;
+            height: 450px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .card-card:hover {
+            box-shadow: 0 0px 8px rgba(10, 139, 209, 0.964);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-caption {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+          
+        }
+
+        .input-groupp {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">TFG</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Inicio</a>
+
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="/login">Iniciar sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="/signup">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+    
+      <div class="col-12 text-left">
+        <h1>Hola, {{ username }}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2 class="my-5">¿Qué quieres generar?</h2>
+      </div>
+    </div>
+
+ 
+        <form class="row g-3">
+            <div class="col">
+              <input class="form-control form-control-lg" placeholder="Escribe lo que quieres generar" type="text" style="margin: 0 8px 0 0;">
+                
+            </div>
+            <div class="col-auto">
+              <a type="submit" href="opciones_imagen.html" class="btn btn-primary btn-lg">Generar</a>
+            </div>
+          </form>
+        
+   
+  </div>
+
+
+</body>
+
+</html>
+
